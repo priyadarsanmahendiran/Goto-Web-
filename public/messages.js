@@ -11,7 +11,7 @@
     };
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
-    const mom = document.getElementById('moments');
+    const diaryInput = document.getElementById('moments');
     const db = firebase.database();
     const dropbtn = document.getElementById('dropbtn');
     var today = new Date();
@@ -25,16 +25,18 @@
     const logoutbtn = document.getElementById('logoutbtn');
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-            dropbtn.addEventListener("click", function() {
-                const mom1 = mom.value;
-                if (mom1 == ' ') {
-                    alert("Invalid Input");
+            dropbtn.addEventListener("click", async function() {
+                const entryText = diaryInput.value;
+                if (entryText == ' ') {
+                    showSnackbar("Please write something.", "warning");
+                    return;
                 } else {
+                    const encrypted = await encryptEntry(entryText, b1 + p1);
                     db.ref('users/' + b1 + '/' + p1 + '/' + today + '/' + r1).set({
-                        mom: mom1
+                        mom: encrypted
                     }).then(function() {
-                        alert("Memories recorded!!!");
-                        window.location = "collabdisplay.html";
+                        showSnackbar("Entry saved!", "success");
+                        setTimeout(function() { window.location = "collabdisplay.html"; }, 1500);
                     }).catch(function(error) {
                         console.log(error);
                     });
@@ -42,8 +44,7 @@
             });
             logoutbtn.addEventListener("click", function() {
                 firebase.auth().signOut();
-                alert("Logged Out!");
-                window.location = "index.html";
+                window.location = "login.html";
             });
         }
     });

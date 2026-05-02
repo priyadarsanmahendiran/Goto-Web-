@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Budget | Go-to!</title>
+    <title>Personal Diary | Go-to!</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
         };
     </script>
 </head>
-<body class="page-bg page-bg-salary">
+<body class="page-bg page-bg-personal">
     <div id="loader">
         <div class="spinner-border text-light" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -43,20 +43,20 @@
                         <a class="nav-link" href="category.html"><i class="fa fa-home"></i> Home</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-book"></i> Diary
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="collab-diary.html"><i class="fa fa-handshake-o"></i> Collaborative</a></li>
-                            <li><a class="dropdown-item" href="personal-diary.html"><i class="fa fa-key"></i> Personal</a></li>
+                            <li><a class="dropdown-item active" href="personal-diary.html"><i class="fa fa-key"></i> Personal</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-bar-chart"></i> Expenses
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item active" href="salary.html"><i class="fa fa-rupee"></i> Add Budget</a></li>
+                            <li><a class="dropdown-item" href="salary.html"><i class="fa fa-rupee"></i> Add Budget</a></li>
                             <li><a class="dropdown-item" href="addexpense.html"><i class="fa fa-plus"></i> Add Expense</a></li>
                             <li><a class="dropdown-item" href="viewexpense.html"><i class="fa fa-exchange"></i> View Expenses</a></li>
                         </ul>
@@ -79,26 +79,23 @@
     </nav>
 
     <div class="container page-section">
-        <div class="row justify-content-center">
-            <div class="col-md-7 col-lg-5 fade-up">
-                <div class="glass-card">
-                    <blockquote class="diary-quote small mb-4">
-                        "Never spend your money before you have earned it." — Thomas Jefferson
-                    </blockquote>
-                    <h5 class="fw-semibold mb-3">Monthly budget</h5>
-                    <div class="mb-3">
-                        <label for="budget" class="form-label">Budget amount</label>
-                        <input type="number" id="budget" name="budget" class="form-control" placeholder="Enter amount">
+        <div class="hero-wrap">
+            <div class="row justify-content-center w-100">
+                <div class="col-md-8 col-lg-5 fade-up">
+                    <div class="glass-card">
+                        <h3 class="fw-bold mb-2">Your Personal Diary</h3>
+                        <p class="mb-4" style="color:rgba(255,255,255,0.7);">
+                            Capture your emotions, memories, and every exciting moment. This diary is yours alone.
+                        </p>
+                        <div class="d-grid gap-2 d-sm-flex">
+                            <a href="write.html" class="btn btn-primary">
+                                <i class="fa fa-pencil me-1"></i> Write for today
+                            </a>
+                            <a href="diary-memories.html" class="btn btn-outline-light">
+                                <i class="fa fa-history me-1"></i> Previous writings
+                            </a>
+                        </div>
                     </div>
-                    <button type="button" id="budgetbtn" class="btn btn-primary w-100 mb-4">Set Budget</button>
-
-                    <hr style="border-color:var(--c-border);">
-                    <h5 class="fw-semibold mt-3 mb-3">Add increment</h5>
-                    <div class="mb-3">
-                        <label for="inc" class="form-label">Amount</label>
-                        <input type="number" id="inc" name="inc" class="form-control" placeholder="Enter amount">
-                    </div>
-                    <button type="button" id="incrementbtn" class="btn btn-outline-light w-100">Add Increment</button>
                 </div>
             </div>
         </div>
@@ -108,9 +105,8 @@
     <script src="/__/firebase/7.15.5/firebase-analytics.js"></script>
     <script src="/__/firebase/7.15.5/firebase-auth.js"></script>
     <script src="/__/firebase/7.15.5/firebase-firestore.js"></script>
-    <script src="/__/firebase/7.15.5/firebase-database.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./snackbar.js"></script>
-    <script src="./salary.js"></script>
+    <script src="./logout.js"></script>
 </body>
 </html>

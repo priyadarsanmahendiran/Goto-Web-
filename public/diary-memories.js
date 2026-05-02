@@ -27,14 +27,16 @@
                     var divider = document.createElement("div");
                     var name = String(i);
                     divider.setAttribute("id", name);
-                    divider.setAttribute("class", "col-12 col-sm-12");
+                    divider.setAttribute("class", "col-12 entry-card");
                     document.getElementById("content").appendChild(divider);
                     var para = document.createElement("H3");
+                    para.setAttribute("class", "entry-date");
                     para.innerHTML = i;
                     document.getElementById(name).appendChild(para);
-                    db.ref('users/' + userId + '/Diary' + '/' + i + '/mom').on("value", function(snapshot) {
+                    db.ref('users/' + userId + '/Diary' + '/' + i + '/mom').on("value", async function(snapshot) {
                         var para1 = document.createElement("P");
-                        para1.innerHTML = snapshot.val();
+                        para1.setAttribute("class", "entry-text");
+                        para1.innerHTML = await decryptEntry(snapshot.val(), userId);
                         document.getElementById(name).appendChild(para1);
                         var storageref = firebase.storage().ref();
                         storageref.child(userId + '/' + i + '.jpg').getDownloadURL().then(function(url) {
@@ -93,8 +95,7 @@
         if (user) {
             logoutbtn.addEventListener("click", function() {
                 firebase.auth().signOut();
-                alert("Logged Out!");
-                window.location = "index.html";
+                window.location = "login.html";
             });
         }
     });

@@ -85,8 +85,7 @@
             });
             logout.addEventListener("click", function() {
                 firebase.auth().signOut();
-                alert("Logged Out!");
-                window.location = "index.html";
+                window.location = "login.html";
             });
         }
     });

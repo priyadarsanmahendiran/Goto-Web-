@@ -12,7 +12,7 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
-    const mom = document.getElementById('moments');
+    const diaryInput = document.getElementById('moments');
     const pic = document.getElementById('pictures');
     const vid = document.getElementById('videos');
     const db = firebase.database();
@@ -45,21 +45,19 @@
                     console.log(error.message);
                 });
             });
-            dropbtn.addEventListener('click', function() {
-                const mom1 = mom.value;
-                if (!mom1) {
-                    alert("Empty Input");
+            dropbtn.addEventListener('click', async function() {
+                const entryText = diaryInput.value;
+                if (!entryText) {
+                    showSnackbar("Please write something first.", "warning");
+                    return;
                 } else {
-                    function writeUserData(userId) {
-                        firebase.database().ref('users/' + userId + '/Diary' + '/' + today).set({
-                            mom: mom1,
-                        }).then(function() {
-                            alert("Memories Recorded");
-                            window.location = "home1.html";
-                        });
-                    }
-
-                    writeUserData(userId);
+                    const encrypted = await encryptEntry(entryText, userId);
+                    firebase.database().ref('users/' + userId + '/Diary' + '/' + today).set({
+                        mom: encrypted,
+                    }).then(function() {
+                        showSnackbar("Memory saved!", "success");
+                        setTimeout(function() { window.location = "personal-diary.html"; }, 1500);
+                    });
                 }
             });
         }
@@ -69,8 +67,7 @@
         if (user) {
             logoutbtn.addEventListener("click", function() {
                 firebase.auth().signOut();
-                alert("Logged Out!");
-                window.location = "index.html";
+                window.location = "login.html";
             });
         } else {
             console.log('Oops! Logged Out');

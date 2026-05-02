@@ -23,7 +23,7 @@
         }).catch(function(error) {
             var errorCode = error.code;
             var errorMessage = error.message;
-            alert('Error: ' + errorMessage);
+            showSnackbar('Sign in failed: ' + errorMessage, 'error');
         });
     });
 })();

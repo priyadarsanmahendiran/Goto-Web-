@@ -25,18 +25,19 @@
                 var db = firebase.database();
                 const userID = user.uid;
                 if (eve1 == ' ' || evede1 == ' ' || evedate == '') {
-                    alert("Invalid Input");
+                    showSnackbar("Please fill in all fields.", "warning");
+                    return;
                 } else {
                     db.ref('users/' + userID + '/Todo' + '/' + eve1).set({
                         Date: evedate,
                         Description: evede1,
                         Status: 'Pending'
-                    }).then(alert("Event added succesfully")).catch(function(error) {
-                        alert("Error " + error.message);
+                    }).then(function() { showSnackbar("Event added!", "success"); }).catch(function(error) {
+                        showSnackbar("Error: " + error.message, "error");
                     });
                 }
             } else {
-                alert("Oops! Logged out");
+                window.location = "login.html";
             }
         });
     });
@@ -45,8 +46,7 @@
         if (user) {
             logoutbtn.addEventListener("click", function() {
                 firebase.auth().signOut();
-                alert("Logged Out!");
-                window.location = "index.html";
+                window.location = "login.html";
             });
         }
     });

@@ -31,7 +31,8 @@
                 var reason = reas.value;
                 var datef = date.value;
                 if (!amt1 || reason == '' || !datef) {
-                    alert("Invalid Input");
+                    showSnackbar("Please fill in all fields.", "warning");
+                    return;
                 } else {
                     console.log(datef);
                     firebase.database().ref('users/' + userId + '/Expense/' + datef).once("value", function(snapshot) {
@@ -54,8 +55,8 @@
                         firebase.database().ref('users/' + userId + '/Expense' + '/' + datef).set({
                             Name: exisname2,
                             Amount: Number(amt2)
-                        }).then(alert("Expenses added successfully")).catch(function(error) {
-                            alert(error.message);
+                        }).then(function() { showSnackbar("Expense recorded!", "success"); }).catch(function(error) {
+                            showSnackbar(error.message, "error");
                         });
                         var data11 = window.localStorage.getItem("data1");
                         var remain = data11 - amt1;
@@ -63,7 +64,7 @@
                         firebase.database().ref('users/' + userId + '/Balance').set({
                             Amount: Number(remain)
                         }).catch(function(error) {
-                            alert(error.message);
+                            showSnackbar(error.message, "error");
                         });
                     });
                 }
@@ -71,8 +72,7 @@
             });
             logout.addEventListener("click", function() {
                 firebase.auth().signOut();
-                alert("Logged Out!");
-                window.location = "index.html";
+                window.location = "login.html";
             });
         }
     });

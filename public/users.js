@@ -142,13 +142,12 @@
                             console.log(names);
                             if (names) {
                                 db.ref('users/' + userID + '/Todo' + '/' + names).remove().then(function() {
-                                    //window.location = "users.html";
-                                    alert("Event deleted successfully");
+                                    showSnackbar("Event deleted.", "success");
                                 }).catch(function(error) {
-                                    alert(error.message);
+                                    showSnackbar(error.message, "error");
                                 });
                             } else {
-                                alert("No Such Event Exist!");
+                                showSnackbar("Event not found.", "warning");
                             }
                         });
                     });
@@ -177,12 +176,12 @@
                             if (names) {
                                 db.ref('users/' + userID + '/Todo' + '/' + names).remove().then(function() {
                                     window.location = "users.html";
-                                    alert("Event deleted successfully");
+                                    showSnackbar("Event deleted.", "success");
                                 }).catch(function(error) {
-                                    alert(error.message);
+                                    showSnackbar(error.message, "error");
                                 });
                             } else {
-                                alert("No Such Event Exist!");
+                                showSnackbar("Event not found.", "warning");
                             }
                         });
                     });
@@ -195,8 +194,7 @@
         if (user) {
             logoutbtn.addEventListener("click", function() {
                 firebase.auth().signOut();
-                alert("Logged Out!");
-                window.location = "index.html";
+                window.location = "login.html";
             });
         }
     });

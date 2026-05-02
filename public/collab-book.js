@@ -32,7 +32,8 @@
         const r1 = refname.value;
         const db = firebase.database();
         if (!b1 || !p1 || !r1) {
-            alert("Invalid Input");
+            showSnackbar("Please fill in all fields.", "warning");
+            return;
         } else {
             db.ref('users/' + b1).on("value", function(snapshot) {
                 var data = snapshot.val();
@@ -58,15 +59,15 @@
                                         }
                                     }
                                     if (flag == 1) {
-                                        alert("You are not a member of this book! Join and start writing");
+                                        showSnackbar("You are not a member. Join the book first.", "warning");
                                     }
                                 });
                             }
                         });
                     } else if (p1 == " ") {
-                        alert("Please enter Password");
+                        showSnackbar("Password is required.", "warning");
                     } else {
-                        alert("Invalid password");
+                        showSnackbar("Invalid password.", "error");
                         break;
                     }
                 }
@@ -74,38 +75,41 @@
         }
 
     });
-    bookjoin.addEventListener('click', function() {
+    bookjoin.addEventListener('click', async function() {
         const b1 = bookid.value;
         const p1 = pword.value;
         const r1 = refname.value;
         const db = firebase.database();
         if (!b1 || !p1 || !r1) {
-            alert("Invalid Input");
+            showSnackbar("Please fill in all fields.", "warning");
+            return;
         } else {
-            db.ref("users/" + b1).on("value", function(snapshot) {
+            db.ref("users/" + b1).on("value", async function(snapshot) {
                 var data = snapshot.val();
                 for (i in data) {
                     if (p1 == i) {
+                        const encrypted = await encryptEntry("Hey I am new here!", b1 + p1);
                         db.ref("users/" + b1 + '/' + p1 + '/' + today + '/' + r1).set({
-                            mom: "Hey I am new here!"
+                            mom: encrypted
                         }).then(window.location = "collabdisplay.html").catch(function(error) {
                             console.log(error);
                         });
                     } else {
-                        alert("Invalid password of the book");
+                        showSnackbar("Wrong book password.", "error");
                     }
                 }
             });
         }
     });
-    bookcreate.addEventListener("click", function() {
+    bookcreate.addEventListener("click", async function() {
         const b1 = bookid.value;
         const p1 = pword.value;
         const r1 = refname.value;
         const db = firebase.database();
         flag = 1;
         if (!b1 || !p1 || !r1) {
-            alert("Invalid Input");
+            showSnackbar("Please fill in all fields.", "warning");
+            return;
         } else {
             db.ref("users/").on("value", function(snapshot) {
                 var daa = snapshot.val();
@@ -121,19 +125,20 @@
             });
             console.log(flag);
             if (flag === 0) {
+                const encrypted = await encryptEntry("New Book up here!", b1 + p1);
                 db.ref("users/" + b1 + '/' + p1 + '/' + today + '/' + r1).set({
-                    mom: "New Book up here!"
+                    mom: encrypted
                 }).then(function() {
-                    alert("Book created successfully");
+                    showSnackbar("Book created!", "success");
                     localStorage.setItem("b1", b1);
                     localStorage.setItem("p1", p1);
                     localStorage.setItem("r1", r1);
-                    window.location = "collabdisplay.html";
+                    setTimeout(function() { window.location = "collabdisplay.html"; }, 1500);
                 }).catch(function(error) {
                     console.log(error);
                 });
             } else if (flag === 1) {
-                alert("Book id already taken");
+                showSnackbar("That Book ID is already taken. Try another.", "warning");
             }
         }
     });
@@ -142,8 +147,7 @@
         if (user) {
             logoutbtn.addEventListener("click", function() {
                 firebase.auth().signOut();
-                alert("Logged Out!");
-                window.location = "index.html";
+                window.location = "login.html";
             });
         } else {
             console.log('Oops! Logged Out');

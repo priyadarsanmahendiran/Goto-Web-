@@ -19,11 +19,11 @@
         const emailid = email.value;
         const pass = password.value;
         var auth = firebase.auth().createUserWithEmailAndPassword(emailid, pass).then(function() {
-            alert("Registered successfully");
-            window.location = "index.html";
+            showSnackbar("Account created! Welcome.", "success");
+            setTimeout(function() { window.location = "login.html"; }, 1500);
         }).catch(function(error) {
             console.log(error);
-            alert('Error: ' + error.message);
+            showSnackbar('Registration failed: ' + error.message, 'error');
         });
     });
 })();

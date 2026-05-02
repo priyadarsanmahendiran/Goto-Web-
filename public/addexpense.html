@@ -1,159 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>add expense</title>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital@1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <title>Add Expense | Go-to!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./styles/style.css">
     <script>
-        document.onreadystatechange = function() {
+        document.onreadystatechange = function () {
             if (document.readyState !== "complete") {
-                document.querySelector(
-                    "body").style.visibility = "hidden";
-                document.querySelector(
-                    "#loader").style.visibility = "visible";
+                document.querySelector("body").style.visibility = "hidden";
+                document.querySelector("#loader").style.visibility = "visible";
             } else {
-                document.querySelector(
-                    "#loader").style.display = "none";
-                document.querySelector(
-                    "body").style.visibility = "visible";
+                document.querySelector("#loader").style.display = "none";
+                document.querySelector("body").style.visibility = "visible";
             }
         };
     </script>
-    <style>
-        body {
-            background-image: url(../images/crop-man-paying-with-american-dollars-4386417.jpg);
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: white;
-        }
-        
-        .bg-dark12 {
-            background-color: black;
-        }
-    </style>
 </head>
-
-<div id="loader">
-    <div class="d-flex justify-content-center">
-        <div class="spinner-grow text-dark m-5" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
+<body class="page-bg page-bg-addexpense">
+    <div id="loader">
+        <div class="spinner-border text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
         </div>
     </div>
-</div>
+    <div class="page-overlay"></div>
 
-<body>
-    <nav class="navbar navbar-dark navbar-expand-lg">
-        <a class="navbar-brand" href="#">
-            <img src="./images/b515e6c2-9e5f-486e-908d-dc3ecd0f8ab4_200x200.png" width="50" height="50" alt="Team 2.0" loading="lazy">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="category.html"><i class="fa fa-home"></i> Home </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index1.html"><i class="fa fa-book"></i> Diary</a>
-                </li>
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-dollar"></i> Expense Tracker
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="salary.html"><i class="fa fa-rupee"></i> Add Budget</a>
-                        <a class="dropdown-item" href="#"><i class="fa fa-plus"></i> Add Expense</a>
-                        <a class="dropdown-item" href="viewexpense.html"><i class="fa fa-exchange"></i> View Expense</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-tasks"></i> To-do list
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <a class="dropdown-item" href="users.html"><i class="fa fa-tasks"></i> Existing Tasks</a>
-                        <a class="dropdown-item" href="create_event.html"><i class="fa fa-tasks"></i> Add tasks</a>
-                    </div>
-                </li>
-            </ul>
-            <button class="btn btn-light" id="logoutbtn"><i class="fa fa-sign-out"></i> Sign Out </button>
+    <nav class="navbar navbar-dark navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="category.html">
+                <img src="./images/b515e6c2-9e5f-486e-908d-dc3ecd0f8ab4_200x200.png" width="38" height="38" alt="Go-to!">
+                <span class="ms-2 fw-semibold">Go-to!</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="category.html"><i class="fa fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-book"></i> Diary
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="collab-diary.html"><i class="fa fa-handshake-o"></i> Collaborative</a></li>
+                            <li><a class="dropdown-item" href="personal-diary.html"><i class="fa fa-key"></i> Personal</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-bar-chart"></i> Expenses
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="salary.html"><i class="fa fa-rupee"></i> Add Budget</a></li>
+                            <li><a class="dropdown-item active" href="addexpense.html"><i class="fa fa-plus"></i> Add Expense</a></li>
+                            <li><a class="dropdown-item" href="viewexpense.html"><i class="fa fa-exchange"></i> View Expenses</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-tasks"></i> To-do
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="users.html"><i class="fa fa-list"></i> View Tasks</a></li>
+                            <li><a class="dropdown-item" href="create_event.html"><i class="fa fa-plus"></i> Add Task</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <button class="btn btn-outline-light btn-sm" id="logoutbtn">
+                    <i class="fa fa-sign-out"></i> Sign Out
+                </button>
+            </div>
         </div>
     </nav>
-    <div class="container" id="addexpense">
-        <div class="form-group row justify-content-center">
-            <div class="col-12">
-                <h5 class="text-center" style="padding: 20px; text-align: center; background-color: black; color: white;">Track Your Expense</h5>
-            </div>
-        </div>
-        <div class="form-group row justify-content-center">
-            <div class="col-12 col-md-2">
-                <label for="spend" class="col-form-label">Amount Spent:</label>
-            </div>
-            <div class="col-md-6">
-                <input name="amount" type="number" class="form-control" id="spend" placeholder="Amount spent">
-            </div>
-        </div>
-        <div class="form-group row justify-content-center">
-            <div class="col-12 col-md-2">
-                <label for="date" class="col-form-label">Date:</label>
-            </div>
-            <div class="col-md-6">
-                <input name="date" type="date" class="form-control" id="date" placeholder="Date">
-            </div>
-        </div>
-        <div class="form-group row justify-content-center">
-            <div class="col-12 col-md-2">
-                <label for="reason" class="col-form-label">Money Spent On:</label>
-            </div>
-            <div class="col-md-6">
-                <select name="reason" id="reason" class="custom-select">
-                    <option value="Hobbies">Spend on hobbies</option>
-                    <option value="Vaccation with friends or family">Vaccation with friends or family</option>
-                    <option value="Education">Education</option>
-                    <option value="Job training">Job training</option>
-                    <option value="Sporting goods">Sporting goods</option>
-                    <option value="EB Bills">Bills</option>
-                    <option value="Food">Food</option>
-                    <option value="Emergency">Emergency</option>
-                    <option value="Donation">Donation</option>
-                    <option value="Online Purchases">Online Purchases</option>
-                    <option value="Offline Purchases">Offline Purchases</option>
-                    <option value="Parties">Parties or birthday treat</option>
-                    <option value="Travelling">Travelling</option>
-                    <option value="Electronic gadgets">Electronic Gadjets</option>
-                    <option value="Personal expense">Personal expense</option>
-                    <option value="other expense">Other expense</option>
-                 </select>
-            </div>
-        </div>
-        <div class="form-group row row-content justify-content-center">
-            <div class="col-12 col-sm-2 offset-1">
-                <button type="submit" id="addexpensebtn" class="btn btn-primary btn-block"> Add</button>
+
+    <div class="container page-section">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-5 fade-up">
+                <div class="glass-card">
+                    <h4 class="fw-bold mb-4"><i class="fa fa-plus-circle me-2" style="color:var(--c-accent)"></i>Track Expense</h4>
+                    <div class="mb-3">
+                        <label for="spend" class="form-label">Amount spent</label>
+                        <input name="amount" type="number" class="form-control" id="spend" placeholder="0.00">
+                    </div>
+                    <div class="mb-3">
+                        <label for="date" class="form-label">Date</label>
+                        <input name="date" type="date" class="form-control" id="date">
+                    </div>
+                    <div class="mb-4">
+                        <label for="reason" class="form-label">Category</label>
+                        <select name="reason" id="reason" class="form-select">
+                            <option value="Hobbies">Hobbies</option>
+                            <option value="Vaccation with friends or family">Vacation</option>
+                            <option value="Education">Education</option>
+                            <option value="Job training">Job training</option>
+                            <option value="Sporting goods">Sporting goods</option>
+                            <option value="EB Bills">Bills</option>
+                            <option value="Food">Food</option>
+                            <option value="Emergency">Emergency</option>
+                            <option value="Donation">Donation</option>
+                            <option value="Online Purchases">Online Purchases</option>
+                            <option value="Offline Purchases">Offline Purchases</option>
+                            <option value="Parties">Parties / Birthday</option>
+                            <option value="Travelling">Travelling</option>
+                            <option value="Electronic gadgets">Electronics</option>
+                            <option value="Personal expense">Personal</option>
+                            <option value="other expense">Other</option>
+                        </select>
+                    </div>
+                    <button type="button" id="addexpensebtn" class="btn btn-primary w-100">
+                        <i class="fa fa-plus me-1"></i> Add Expense
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-analytics.js"></script>
     <script src="/__/firebase/7.15.5/firebase-app.js"></script>
-
     <script src="/__/firebase/7.15.5/firebase-analytics.js"></script>
-    <script src="/__/firebase/7.15.5/firebase-database.js"></script>
-
     <script src="/__/firebase/7.15.5/firebase-auth.js"></script>
     <script src="/__/firebase/7.15.5/firebase-firestore.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="/__/firebase/7.15.5/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./snackbar.js"></script>
     <script src="./addexpense.js"></script>
-
 </body>
-
 </html>

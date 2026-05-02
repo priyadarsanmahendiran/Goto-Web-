@@ -24,11 +24,11 @@
         for (i in data) {
             var name = String(i);
             var divider = document.createElement("div");
-            divider.setAttribute("class", "rcorners1");
+            divider.setAttribute("class", "col-12 col-md-6 entry-card");
             divider.setAttribute("id", "one");
-            divider.setAttribute("style", "border-style:solid;");
             document.getElementById('two').appendChild(divider);
             var para = document.createElement("h3");
+            para.setAttribute("class", "entry-date");
             para.innerHTML = name;
             document.getElementById("one").appendChild(para);
             db.ref('users/' + b1 + '/' + p1 + '/' + i).on("value", function(snapshot) {
@@ -36,13 +36,13 @@
                 for (j in data1) {
                     var para1 = document.createElement("P");
                     para1.innerHTML = j;
-                    para1.setAttribute("class", "nametag");
+                    para1.setAttribute("class", "entry-author");
                     document.getElementById("one").appendChild(para1);
-                    db.ref('users/' + b1 + '/' + p1 + '/' + i + '/' + j + '/mom').on("value", function(snapshot) {
-                        var data2 = snapshot.val();
+                    db.ref('users/' + b1 + '/' + p1 + '/' + i + '/' + j + '/mom').on("value", async function(snapshot) {
+                        var entryText = await decryptEntry(snapshot.val(), b1 + p1);
                         var para2 = document.createElement("p");
-                        para2.innerHTML = data2;
-                        para2.setAttribute("class", "row");
+                        para2.innerHTML = entryText;
+                        para2.setAttribute("class", "entry-text");
                         document.getElementById("one").appendChild(para2);
                     });
                 }

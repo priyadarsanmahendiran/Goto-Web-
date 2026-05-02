@@ -17,10 +17,10 @@
     reslink.addEventListener('click', function() {
         const emailAddress = email.value;
         var auth = firebase.auth().sendPasswordResetEmail(emailAddress).then(function() {
-            alert("Reset Link sent!");
-            window.location = "index.html";
+            showSnackbar("Reset link sent! Check your email.", "success");
+            window.location = "login.html";
         }).catch(function(error) {
-            alert("Error: " + error.message);
+            showSnackbar("Error: " + error.message, "error");
         });
     });
 })();

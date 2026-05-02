@@ -23,17 +23,18 @@
                 var bud1 = bud.value;
                 var db = firebase.database();
                 if (!bud1) {
-                    alert("Invalid Input");
+                    showSnackbar("Please enter a valid amount.", "warning");
+                    return;
                 } else {
                     db.ref('users/' + userId + '/Budget').set({
                         Amount: Number(bud1)
-                    }).then(alert("Budget Added!")).catch(function(error) {
-                        alert(error.message);
+                    }).then(function() { showSnackbar("Budget set!", "success"); }).catch(function(error) {
+                        showSnackbar(error.message, "error");
                     });
                     db.ref('users/' + userId + '/Balance').set({
                         Amount: Number(bud1)
-                    }).then(alert("Balance Added!")).catch(function(error) {
-                        alert(error.message);
+                    }).then(function() { showSnackbar("Balance added!", "success"); }).catch(function(error) {
+                        showSnackbar(error.message, "error");
                     });
                 }
             });
@@ -41,7 +42,8 @@
                 var inc1 = Number(inc.value);
                 var db = firebase.database();
                 if (inc1 == 0) {
-                    alert("Invalid Input");
+                    showSnackbar("Please enter a valid amount.", "warning");
+                    return;
                 } else {
                     db.ref('users/' + userId + '/Budget').once("value", function(snapshot) {
                         var data = snapshot.val();
@@ -50,9 +52,9 @@
                         db.ref('users/' + userId + '/Budget').set({
                             Amount: Number(add)
                         }).then(function() {
-                            alert("Budget Updated!");
+                            showSnackbar("Budget updated!", "success");
                         }).catch(function(error) {
-                            alert(error.message);
+                            showSnackbar(error.message, "error");
                         });
                     });
                     db.ref('users/' + userId + '/Balance/Amount').once("value", function(snapshot) {
@@ -61,16 +63,15 @@
                         var addb = data1 + inc1;
                         db.ref('users/' + userId + '/Balance').set({
                             Amount: Number(addb)
-                        }).then(alert("Balance Updated!")).catch(function(error) {
-                            alert(error.message);
+                        }).then(function() { showSnackbar("Balance updated!", "success"); }).catch(function(error) {
+                            showSnackbar(error.message, "error");
                         });
                     });
                 }
             });
             logout.addEventListener("click", function() {
                 firebase.auth().signOut();
-                alert("Logged Out!");
-                window.location = "index.html";
+                window.location = "login.html";
             });
         }
     });
